@@ -35,7 +35,7 @@ export const Erc1155Balance = () => {
       tokens.push(e.gt(0))
     })
     let tokenList: tokenIdWithKana[] = []
-    tokens.map((e, i) => {
+    tokens.map((e: boolean, i: number) => {
       if (e === true) tokenList.push(detectedTokenIds[i])
     })
     setOwnedTokens(tokenList)
