@@ -65,7 +65,7 @@ export const Erc1155Balance = () => {
               )
             })}
           </UnorderedList>
-          <Text mt="2em">First Token URI: {tokenURI}</Text>
+          {/* <Text mt="2em">First Token URI: {tokenURI}</Text> */}
         </>
       ) : (
         <Text>
