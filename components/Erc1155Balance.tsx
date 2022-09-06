@@ -1,6 +1,13 @@
 import { useNetwork, useAccount } from 'wagmi'
 import { useState, useEffect } from 'react'
-import { Box, Text, Badge, ListItem, UnorderedList } from '@chakra-ui/react'
+import {
+  Box,
+  Text,
+  Badge,
+  ListItem,
+  UnorderedList,
+  Link
+} from '@chakra-ui/react'
 import { CheckIcon, NotAllowedIcon } from '@chakra-ui/icons'
 import { useHas1155Token } from '../hooks/'
 import { useTokenURI } from '../hooks/'
@@ -24,7 +31,7 @@ export const Erc1155Balance = () => {
     addresses,
     detectedTokenIds.map((e) => e.tokenId)
   )
-  const { tokenURI, tokenUriIsError, tokenUriError } = useTokenURI(
+  const { processedTokenURI } = useTokenURI(
     erc1155Contract,
     ownedTokens[0]?.tokenId || '0'
   )
@@ -65,7 +72,9 @@ export const Erc1155Balance = () => {
               )
             })}
           </UnorderedList>
-          {/* <Text mt="2em">First Token URI: {tokenURI}</Text> */}
+          <Box mt="1em">
+            <Link href={processedTokenURI}>First Token URI</Link>
+          </Box>
         </>
       ) : (
         <Text>
