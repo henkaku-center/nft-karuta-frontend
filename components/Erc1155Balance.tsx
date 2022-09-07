@@ -62,19 +62,10 @@ export const Erc1155Balance = () => {
         <>
           <Text>{ownedTokens.length} tokens owned:</Text>
           <UnorderedList>
-            {ownedTokens.map((e, i) => {
-              return (
-                <ListItem key={i}>
-                  <Badge colorScheme="green" mr="0.5em">
-                    <CheckIcon></CheckIcon> {e.kana}
-                  </Badge>
-                </ListItem>
-              )
+            {ownedTokens.map((token, i) => {
+              return <TokenDisplay key={i} token={token} />
             })}
           </UnorderedList>
-          <Box mt="1em">
-            <Link href={processedTokenURI}>First Token URI</Link>
-          </Box>
         </>
       ) : (
         <Text>
@@ -84,5 +75,28 @@ export const Erc1155Balance = () => {
         </Text>
       )}
     </Box>
+  )
+}
+
+function TokenDisplay({ token }: { token: tokenIdWithKana }) {
+  const { chain } = useNetwork()
+  const erc1155Contract = getContractAddress({
+    name: 'erc1155Contract',
+    chainId: chain?.id
+  })
+  const { processedTokenURI } = useTokenURI(
+    erc1155Contract,
+    token.tokenId || '0'
+  )
+  return (
+    <>
+      <ListItem key={token.tokenId}>
+        <Link href={processedTokenURI}>
+          <Badge colorScheme="green" mr="0.5em">
+            <CheckIcon></CheckIcon> {token.kana}
+          </Badge>
+        </Link>
+      </ListItem>
+    </>
   )
 }
