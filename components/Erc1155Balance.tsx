@@ -1,18 +1,12 @@
 import { useNetwork, useAccount } from 'wagmi'
 import { useState, useEffect } from 'react'
-import {
-  Box,
-  Text,
-  Badge,
-  ListItem,
-  UnorderedList,
-  Link
-} from '@chakra-ui/react'
-import { CheckIcon, NotAllowedIcon } from '@chakra-ui/icons'
+import { Box, Text, Badge, UnorderedList } from '@chakra-ui/react'
+import { NotAllowedIcon } from '@chakra-ui/icons'
 import { useHas1155Token } from '../hooks/'
 import { useTokenURI } from '../hooks/'
 import { getContractAddress } from '../utils/contractAddress'
 import { detectedTokenIds, tokenIdWithKana } from '../utils/tokenIds'
+import { TokenDisplay } from '../components'
 
 export const Erc1155Balance = () => {
   const [ownedTokens, setOwnedTokens] = useState<tokenIdWithKana[]>([])
@@ -75,28 +69,5 @@ export const Erc1155Balance = () => {
         </Text>
       )}
     </Box>
-  )
-}
-
-function TokenDisplay({ token }: { token: tokenIdWithKana }) {
-  const { chain } = useNetwork()
-  const erc1155Contract = getContractAddress({
-    name: 'erc1155Contract',
-    chainId: chain?.id
-  })
-  const { processedTokenURI } = useTokenURI(
-    erc1155Contract,
-    token.tokenId || '0'
-  )
-  return (
-    <>
-      <ListItem key={token.tokenId}>
-        <Link href={processedTokenURI}>
-          <Badge colorScheme="green" mr="0.5em">
-            <CheckIcon></CheckIcon> {token.kana}
-          </Badge>
-        </Link>
-      </ListItem>
-    </>
   )
 }
