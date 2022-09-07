@@ -12,7 +12,10 @@ export const useTokenURI = (contract: string, tokenId: string) => {
     functionName: 'uri',
     args: [tokenId]
   })
-  const processedTokenURI = processTokenURI(tokenURI, tokenId)
+  const processedTokenURI = processTokenURI(
+    typeof tokenURI == 'string' ? tokenURI : '',
+    tokenId
+  )
   return {
     tokenURI,
     processedTokenURI,
