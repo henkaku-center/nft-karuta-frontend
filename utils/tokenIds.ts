@@ -129,7 +129,7 @@ const detectedTokenIds: tokenIdWithKana[] = [
     kana: 'は',
     tokenId:
       '102387803806082216118256384254925628923299366765729593363701234847008350535744'
-  }
+  },
   {
     kana: 'ひ’,
     tokenId:
