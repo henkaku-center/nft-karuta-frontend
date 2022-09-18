@@ -9,7 +9,7 @@ import {
 } from '../utils/contractAddress'
 import { tokenIdWithKana } from '../utils/tokenIds'
 
-export function TokenDisplay({ token }: { token: tokenIdWithKana }) {
+export function TokenDisplay({ token }) {
   const { chain } = useNetwork()
   const erc1155Contract = getContractAddress({
     name: 'erc1155Contract',
@@ -54,7 +54,7 @@ export function TokenDisplay({ token }: { token: tokenIdWithKana }) {
             </Link>
             <Text mt="1em">Available properties:</Text>
             {tokenMetadata.traits.map(({ value }) => (
-              <Badge colorScheme="green" mr="4px">
+              <Badge colorScheme="green" mr="4px" key={value}>
                 <CheckIcon></CheckIcon>
                 {value}
               </Badge>
