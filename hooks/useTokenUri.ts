@@ -27,6 +27,8 @@ export const useTokenURI = (contract: string, tokenId: string) => {
 // OpenSea does not return an URI for the token's metadata, but a pattern
 // We need to replace the ID in '0x{id}' with the token ID in hex
 const processTokenURI = (tokenURI: string, tokenId: string): string => {
+  //Return empty string if we got 0 as a tokenURI
+  if (tokenId == '0') return ''
   // Do not alter the URI if it is not an OpenSea API one
   if (tokenURI.indexOf('api.opensea.io/api') == -1) return tokenURI
 
@@ -36,5 +38,5 @@ const processTokenURI = (tokenURI: string, tokenId: string): string => {
 
   const processedTokenURI = tokenURI.substring(0, tokenIdIndex) + '0x'
   const tokenIdHex = BigInt(tokenId).toString(16)
-  return processedTokenURI + tokenIdHex + '?format=json'
+  return processedTokenURI + tokenIdHex //+ '?format=json'
 }

@@ -25,4 +25,11 @@ const getContractAddress = ({ name, chainId }: getContractAddressArg) => {
   return contractAddress[name][chainId || defaultChainID]
 }
 
-export { contractAddress, defaultChainID, getContractAddress }
+const openSeaTokenAddress =
+  'https://opensea.io/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/'
+export {
+  contractAddress,
+  defaultChainID,
+  getContractAddress,
+  openSeaTokenAddress
+}
