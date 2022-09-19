@@ -1,15 +1,22 @@
 import { useNetwork, useAccount } from 'wagmi'
 import { useState, useEffect } from 'react'
-import { Box, Text, Badge, Stack, Heading, UnorderedList } from '@chakra-ui/react'
+import {
+  Box,
+  Text,
+  Badge,
+  Stack,
+  Heading,
+  UnorderedList
+} from '@chakra-ui/react'
 import { NotAllowedIcon } from '@chakra-ui/icons'
 import { useHas1155Token } from '../hooks/'
 import { useTokenURI } from '../hooks/'
 import { getContractAddress } from '../utils/contractAddress'
-import { detectedTokenIds, tokenIdWithKana } from '../utils/tokenIds'
+import { detectedTokenIds, TokenIdWithKana } from '../utils/tokenIds'
 import { TokenDisplay } from '../components'
 
 export const Erc1155Balance = () => {
-  const [ownedTokens, setOwnedTokens] = useState<tokenIdWithKana[]>([])
+  const [ownedTokens, setOwnedTokens] = useState<TokenIdWithKana[]>([])
   const { chain } = useNetwork()
   const { address, isConnected } = useAccount()
   const erc1155Contract = getContractAddress({
@@ -35,7 +42,7 @@ export const Erc1155Balance = () => {
     balances?.map((e) => {
       tokens.push(e.gt(0))
     })
-    let tokenList: tokenIdWithKana[] = []
+    let tokenList: TokenIdWithKana[] = []
     tokens.map((e: boolean, i: number) => {
       if (e === true) tokenList.push(detectedTokenIds[i])
     })
@@ -54,10 +61,10 @@ export const Erc1155Balance = () => {
     <Box mt="1em">
       {ownedTokens.length > 0 ? (
         <>
-          <Heading as='h2' size='md'>
+          <Heading as="h2" size="md">
             {ownedTokens.length} token owned:
           </Heading>
-          <Stack direction={['column', 'row']} mt="1em" spacing='24px'>
+          <Stack direction={['column', 'row']} mt="1em" spacing="24px">
             {ownedTokens.map((token, i) => {
               return <TokenDisplay key={i} token={token} />
             })}
@@ -69,8 +76,7 @@ export const Erc1155Balance = () => {
             <NotAllowedIcon></NotAllowedIcon> No tokens owned
           </Badge>
         </Text>
-      )
-      }
-    </Box >
+      )}
+    </Box>
   )
 }
