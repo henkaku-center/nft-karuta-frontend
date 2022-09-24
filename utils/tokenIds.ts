@@ -1,9 +1,9 @@
-interface tokenIdWithKana {
+interface TokenIdWithKana {
   kana: string
   tokenId: string
 }
 
-const detectedTokenIds: tokenIdWithKana[] = [
+const detectedTokenIds: TokenIdWithKana[] = [
   {
     kana: 'あ',
     tokenId:
@@ -137,4 +137,4 @@ const detectedTokenIds: tokenIdWithKana[] = [
   }
 ]
 
-export { detectedTokenIds, type tokenIdWithKana }
+export { detectedTokenIds, type TokenIdWithKana }
